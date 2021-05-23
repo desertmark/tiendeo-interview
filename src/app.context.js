@@ -19,10 +19,15 @@ export function useAppState() {
 function AppProvider({ children, userApi, tokenService }) {
     const [isAppReady, setIsAppReady] = useState(false);
     useEffect(() => {
-        userApi.getUser().then(token => {
-            tokenService.setToken(token);
+        let token = tokenService.getToken();
+        if (token) {
             setIsAppReady(true);
-        });
+        } else {
+            userApi.getUser().then(token => {
+                tokenService.setToken(token);
+                setIsAppReady(true);
+            });
+        }
     }, []);
 
     return (

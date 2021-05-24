@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import CardsApi from '../../api/cards.api';
+import { useAppState } from '../../app.context';
 import { cardsApi } from '../../config/inversify.depedencies';
 import { withDependency } from '../../di.context';
 const HomeContext = createContext();
@@ -34,6 +35,7 @@ function orderByDateOrNumber(orderBy) {
  */
 function HomeProvider({ children, cardsApi }) {
     const [cards, setCards] = useState([]);
+    const appState = useAppState();
     
     function orderCardsBy(cards, orderBy) {
         if (cards && cards.length) {
@@ -59,21 +61,25 @@ function HomeProvider({ children, cardsApi }) {
             setCards(orderCardsBy(cards, orderBy));
         }
         const task = _loadCards();
+        appState.loader.waitFor(task);
         return task;
     }
 
     function createCard(card) {
         const task = cardsApi.createCard(card);
+        appState.loader.waitFor(task);
         return task;
     }
 
     function removeCard(cardId) {
         const task = cardsApi.deleteCard(cardId);
+        appState.loader.waitFor(task);
         return task;
     }
 
     function updateCard(card) {
         const task = cardsApi.updateCard(card);
+        appState.loader.waitFor(task);
         return task;
     }
 

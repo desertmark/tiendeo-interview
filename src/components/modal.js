@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { zIndex } from '../config/z-index';
 import Flex from './flex';
+import { Overlay } from './overlay';
 
 const ModalWrapper = styled(Flex)`
     position: fixed;
@@ -11,18 +13,8 @@ const ModalWrapper = styled(Flex)`
     .modal__content {
         justify-content: center;
         align-items: center;
-        z-index: 2;
+        z-index: ${zIndex.modal};
     }
-`;
-
-const Overlay = styled.div`
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    opacity: 0.4;
-    z-index: 1;
-    background-color: black;
 `;
 
 function Modal({ children, isVisible, onClose }) {

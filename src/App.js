@@ -1,12 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './app/home/home';
-import { tokenService, userApi } from './config/inversify.depedencies';
-import { withDependency } from './di.context';
 import UserApi from './api/user.api';
-import { useEffect } from 'react';
 import TokenService from './services/token.service';
-import AppProvider from './app.context';
+import AppProvider, { useAppState } from './app.context';
+import Spinner from './components/spinner';
 /**
  * 
  * @param {{
@@ -15,9 +12,12 @@ import AppProvider from './app.context';
  * }} props 
  */
 function App() {
+  const appState = useAppState();
   return (
     <div>
       <main>
+        {/* {appState.isLoading && <h1>Loading...</h1>} */}
+        <Spinner isVisible={appState.isLoading}></Spinner>
         <Home></Home>
       </main>
     </div>

@@ -45,7 +45,7 @@ function Card({ card, width, onEdit, onRemove }) {
                 <img className="card-image-wrapper__img" src="https://s1.1zoom.me/big3/471/Painting_Art_Back_view_Photographer_575380_3840x2400.jpg"></img>
                 <Text className="card-image-wrapper__title" secondary>{title}</Text>
             </Flex>
-            <Flex className="card__description">
+            <Flex className="card__description" flex="1 1 auto">
                 <Text>{description}</Text>
             </Flex>
             <Flex direction="row">

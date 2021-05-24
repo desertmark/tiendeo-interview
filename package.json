@@ -12,6 +12,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "reflect-metadata": "^0.1.13",
+    "serve": "^11.3.2",
     "styled-components": "^5.3.0",
     "web-vitals": "^1.0.1"
   },
@@ -19,7 +20,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve:prod": "serve -s build -l 80",
+    "start:prod": "npm run build && npm run serve:prod",
+    "docker:build": "docker build -t tiendeo .",
+    "docker:run": "docker run -p $PORT:80 tiendeo"
   },
   "eslintConfig": {
     "extends": [

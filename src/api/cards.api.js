@@ -16,6 +16,35 @@ class CardsApi extends BaseApi {
             console.error(e);
         }
     }
+
+    async createCard(card) {
+        try {
+            const res = await this.axios.post('/cards', card);
+            return res.data;
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async updateCard({ id, title, description }) {
+        try {
+            const res = await this.axios.put(`/cards/${id}`, { title, description });
+            return res.data;
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
+    }
+
+    async deleteCard(cardId) {
+        try {
+            const res = await this.axios.delete(`/cards/${cardId}`);
+            return res.data;
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
+    }
 }
 
 decorate(injectable(), CardsApi);

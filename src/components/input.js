@@ -16,12 +16,12 @@ export const InputWrapper = styled(Flex)`
         padding: 0;
    }
 `;
-function Input({ name, placeholder, label, ...rest }) {
+function Input({ name, placeholder, label, value, ...rest }) {
 
     return (
         <InputWrapper {...rest}>
             {/* <Text class="input__label">{label}</Text> */}
-            <input name={name} placeholder={placeholder || label} ></input>
+            <input name={name} placeholder={placeholder || label} value={value}></input>
         </InputWrapper>
     );
 }

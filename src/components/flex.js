@@ -7,6 +7,7 @@ const Flex = styled.div`
     justify-content: ${({ justify }) => justify};
     margin-top: ${({ mt }) => mt};
     margin-bottom: ${({ mb }) => mb};
+    margin: ${({ m }) => m};
     max-width: ${({ mw }) => mw};
     flex: ${({ flex }) => flex};
 `;

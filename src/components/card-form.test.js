@@ -6,7 +6,7 @@ test('card-form has all the fields', () => {
     render(<CardForm></CardForm>);
     const titleInput = screen.getByPlaceholderText('Title');
     const descriptionInput = screen.getByPlaceholderText('Description');
-    const imageUrlInput = screen.getByPlaceholderText('Image URL');
+    const imageInput = screen.getByPlaceholderText('Image');
     const submit = screen.getByText('Añadir', { selector: 'button[type="submit"]', exact: false });
 
     // const titleInput = document.querySelector('input[name="title"]');
@@ -16,7 +16,7 @@ test('card-form has all the fields', () => {
 
     expect(titleInput).toBeInTheDocument();
     expect(descriptionInput).toBeInTheDocument();
-    expect(imageUrlInput).toBeInTheDocument();
+    expect(imageInput).toBeInTheDocument();
     expect(submit).toBeInTheDocument();
 });
 
@@ -32,16 +32,14 @@ test('card-form preloads values when a card is given', () => {
 
     const titleInput = screen.getByPlaceholderText('Title');
     const descriptionInput = screen.getByPlaceholderText('Description');
-    const imageUrlInput = screen.getByPlaceholderText('Image URL');
     const submit = screen.getByText('Editar', { selector: 'button[type="submit"]', exact: false });
 
     // const titleInput = document.querySelector('input[name="title"]');
     // const descriptionInput = document.querySelector('input[name="description"]');
-    // const imageUrlInput = document.querySelector('input[name="imageUrl"]');
 
     expect(titleInput.value).toEqual(testCard.title);
     expect(descriptionInput.value).toEqual(testCard.description);
-    expect(imageUrlInput.value).toEqual(testCard.imageUrl);
+
     // Test it exists with edit mode text
     expect(submit).toBeInTheDocument();
 

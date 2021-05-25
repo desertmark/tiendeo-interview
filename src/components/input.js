@@ -4,9 +4,7 @@ import Flex from './flex';
 import Text from './text';
 export const InputWrapper = styled(Flex)`
     padding: 1rem;
-    .input__label {
-        margin-bottom: 0.25rem;
-    }
+
    input {
         border: none;
         border-bottom: 1px solid #ccc;
@@ -16,12 +14,11 @@ export const InputWrapper = styled(Flex)`
         padding: 0;
    }
 `;
-function Input({ name, placeholder, label, value, ...rest }) {
+function Input({ name, placeholder, label, value, defaultValue, disabled, type, ...rest }) {
 
     return (
         <InputWrapper {...rest}>
-            {/* <Text class="input__label">{label}</Text> */}
-            <input name={name} placeholder={placeholder || label} value={value}></input>
+            <input disabled={disabled} type={type} name={name} placeholder={placeholder || label} value={value} defaultValue={defaultValue}></input>
         </InputWrapper>
     );
 }

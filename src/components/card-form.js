@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Button from './button';
 import Flex from './flex';
@@ -13,7 +13,7 @@ const CardFormWrapper = styled(Flex)`
 function CardForm({ card, onSubmit }) {
 
     const [values, setValues] = useState(card);
-    
+    const imgRef = useRef();
     function handleChange(key) {
         return (event) => setValues({
             ...values,
@@ -29,13 +29,35 @@ function CardForm({ card, onSubmit }) {
         onSubmit && onSubmit(values);
     }
 
+    function getPreviewUrl(file) {
+        return new Promise((res, rej) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                res(e.target.result)
+            }
+            reader.onerror = rej;
+            reader.readAsDataURL(file);
+        })
+    }
+
+    function handleImage(e) {
+        const image = e.target.files[0];
+        getPreviewUrl(image).then(imageUrl => {
+            setValues({
+                ...values,
+                image,
+                imageUrl,
+            });
+        });
+    }
+
     return (
         <CardFormWrapper>
             <h1>Nueva tarjeta</h1>
             <form onSubmit={handleSubmit}>
-                <Input value={values && values.title} onChange={handleChange('title')} mt="1rem" label="Title" name="title" type="text"></Input>
-                <Input value={values && values.description} onChange={handleChange('description')} mt="1rem" label="Description" name="description" type="text"></Input>
-                <Input value={values && values.imageUrl} onChange={handleChange('imageUrl')} mt="1rem" label="Image URL" name="imageUrl" type="text"></Input>
+                <Input defaultValue={values && values.title} onChange={handleChange('title')} mt="1rem" label="Title" name="title" type="text"></Input>
+                <Input defaultValue={values && values.description} onChange={handleChange('description')} mt="1rem" label="Description" name="description" type="text"></Input>
+                <Input disabled={!!card} onChange={handleImage} mt="1rem" label="Image" name="image" type="file"></Input>
                 <Flex align="center" mt="3rem">
                     <Button type="submit">
                         {card ? 'Editar tarjeta' : 'Añadir Tarjeta'}
@@ -45,7 +67,7 @@ function CardForm({ card, onSubmit }) {
 
             {values && values.imageUrl &&
                 <Flex mt="1rem">
-                    <img src={values.imageUrl}></img>
+                    <img width="100%" height="350px" ref={imgRef} src={values.imageUrl}></img>
                 </Flex>
             }
         </CardFormWrapper>

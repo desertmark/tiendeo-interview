@@ -19,7 +19,13 @@ class CardsApi extends BaseApi {
 
     async createCard(card) {
         try {
-            const res = await this.axios.post('/cards', card);
+
+            const form = new FormData();
+            form.append('title', card.title);
+            form.append('description', card.description);
+            form.append('image', card.image);
+
+            const res = await this.axios.post('/cards', form);
             return res.data;
         } catch (e) {
             console.error(e);

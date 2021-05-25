@@ -15,6 +15,7 @@ export const CardWrapper = styled(Flex)`
 
     .card-image-wrapper__img {
         width: 100%;
+        max-height: 350px;
     }
         
     .card-image-wrapper__title {
@@ -41,8 +42,7 @@ function Card({ card, width, onEdit, onRemove }) {
     return (
         <CardWrapper width={width}>
             <Flex className="card__image-wrapper">
-                {/* <img className="card-image-wrapper__img" src={imageUrl || placeholder}></img> */}
-                <img className="card-image-wrapper__img" src="https://s1.1zoom.me/big3/471/Painting_Art_Back_view_Photographer_575380_3840x2400.jpg"></img>
+                <img className="card-image-wrapper__img" src={imageUrl || placeholder}></img>
                 <Text className="card-image-wrapper__title" secondary>{title}</Text>
             </Flex>
             <Flex className="card__description" flex="1 1 auto">

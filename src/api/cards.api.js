@@ -23,7 +23,9 @@ class CardsApi extends BaseApi {
             const form = new FormData();
             form.append('title', card.title);
             form.append('description', card.description);
-            form.append('image', card.image);
+            if (card.image) {
+                form.append('image', card.image);
+            }
 
             const res = await this.axios.post('/cards', form);
             return res.data;
